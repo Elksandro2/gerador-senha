@@ -9,9 +9,12 @@ import Input from "../Input";
 export default function GeradorSenha() {
     const { password, generatePassword } = useGenerater()
     const [copyText, setCopyText] = useState("Copiar")
-    const [passwordSize, setPasswordSize] = useState(12)
+    const [customSize, setCustomSize] = useState(8)
+    const [showInput, setShowInput] = useState(false)
 
-    function copiarSenha() {
+    const passwordSize = showInput ? customSize : 8;
+
+    function copyPassword() {
         if(password){
             navigator.clipboard.writeText(password)
             setCopyText("Copiado!")
@@ -22,14 +25,25 @@ export default function GeradorSenha() {
         <div className={styles.container}>
             <Title text={"Gerador de senhas"}/>
             <div>
+                <label htmlFor="showInput">Customizar o tamanho:</label>
+                <input 
+                    type="checkbox" 
+                    id="showInput"
+                    value={showInput}
+                    onChange={() => setShowInput(currentState => !currentState)}
+                />
+            </div>
+            {showInput ? (
+                <div>
                 <label htmlFor="passwordSize">Tamanho:</label>
                 <Input 
-                    passwordSize={passwordSize} 
-                    setPasswordSize={setPasswordSize}
+                    passwordSize={customSize} 
+                    setPasswordSize={setCustomSize}
                     typeInput={"number"}
                     idInput={"passwordSize"}
                 />
             </div>
+            ) : null}
             <div className={styles.buttons}>
                 <Button
                     onClick={() => {
@@ -37,9 +51,9 @@ export default function GeradorSenha() {
                         setCopyText("Copiar");
                     }}
                 >
-                    Gerar!
+                    Gerar senha de {passwordSize} caracteres!
                 </Button>
-                <Button onClick={copiarSenha}>{copyText}</Button>
+                <Button onClick={copyPassword}>{copyText}</Button>
             </div>
             <Senha senha={password}/>
         </div>
