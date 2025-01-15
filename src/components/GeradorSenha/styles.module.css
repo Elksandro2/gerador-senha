@@ -9,5 +9,20 @@
 .buttons {
     display: flex;
     gap: 2rem;
-    margin: 2rem;
+    margin: 0 2rem;
+}
+
+input {
+    border: 0;
+    border-radius: .4rem;
+    color: #fff;
+    background-color: #141414;
+    padding: 0.4em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    margin-left: .4rem;
+}
+
+.container > div:first-of-type {
+    margin: 2rem 0 2.5rem;
 }

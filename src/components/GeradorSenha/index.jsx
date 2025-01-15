@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function GeradorSenha() {
     const { password, generatePassword } = useGenerater()
     const [copyText, setCopyText] = useState("Copiar")
+    const [passwordSize, setPasswordSize] = useState(12)
 
     function copiarSenha() {
         if(password){
@@ -19,10 +20,20 @@ export default function GeradorSenha() {
     return (
         <div className={styles.container}>
             <Title text={"Gerador de senhas"}/>
+            <div>
+                <label htmlFor="passwordSize">Tamanho:</label>
+                <input 
+                    type="number" 
+                    id="passwordSize" 
+                    min={1} 
+                    value={passwordSize}
+                    onChange={(ev) => setPasswordSize(ev.target.value)}
+                />
+            </div>
             <div className={styles.buttons}>
                 <Button
                     onClick={() => {
-                        generatePassword(); 
+                        generatePassword(passwordSize); 
                         setCopyText("Copiar");
                     }}
                 >
