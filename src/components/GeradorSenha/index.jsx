@@ -4,6 +4,7 @@ import Title from "../Title";
 import styles from "./styles.module.css"
 import useGenerater from "../../hooks/useGenerater";
 import { useState } from "react";
+import Input from "../Input";
 
 export default function GeradorSenha() {
     const { password, generatePassword } = useGenerater()
@@ -22,12 +23,11 @@ export default function GeradorSenha() {
             <Title text={"Gerador de senhas"}/>
             <div>
                 <label htmlFor="passwordSize">Tamanho:</label>
-                <input 
-                    type="number" 
-                    id="passwordSize" 
-                    min={1} 
-                    value={passwordSize}
-                    onChange={(ev) => setPasswordSize(ev.target.value)}
+                <Input 
+                    passwordSize={passwordSize} 
+                    setPasswordSize={setPasswordSize}
+                    typeInput={"number"}
+                    idInput={"passwordSize"}
                 />
             </div>
             <div className={styles.buttons}>
